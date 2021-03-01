@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import Layout from "../components/Layout";
 import TodoApp from "../components/TodoApp";
 import TodoModel from "../TodoModel";
-import "todomvc-common/base.css";
-import "todomvc-app-css/index.css";
 
 export default function Home() {
   const model = useRef(new TodoModel("react-todos"));
@@ -15,8 +14,10 @@ export default function Home() {
   }, []);
 
   return (
-    <section className="todoapp">
-      <TodoApp model={model.current} />
-    </section>
+    <Layout title="Tasks">
+      <section className="todoapp">
+        <TodoApp model={model.current} />
+      </section>
+    </Layout>
   );
 }

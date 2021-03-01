@@ -1,0 +1,37 @@
+.container {
+  width: 600px;
+  margin-top: 90px;
+  border-radius: 3px;
+  border: 1px solid #e2ebf8;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px 40px;
+  padding-bottom: 20px;
+  background-color: white;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.row img {
+  margin-right: 15px;
+  max-height: 30px;
+}
+
+.row p {
+  color: #333333;
+  font-weight: 600;
+  flex: 1;
+}
+
+.row button {
+  border: 1px solid #e2ebf8;
+  border-radius: 3px;
+  box-shadow: 0px 1px 4px rgba(226, 235, 248, 0.7);
+  color: #333333;
+  padding: 8px 24px;
+  font-weight: 600;
+}
