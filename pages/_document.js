@@ -4,7 +4,9 @@ class RootDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <title>TaskLab</title>
+        </Head>
         <body>
           <Main />
           <NextScript />
