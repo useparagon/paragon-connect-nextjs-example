@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
 
 MyApp.getInitialProps = async (appContext) => {
   const appProps = await App.getInitialProps(appContext);
-  if (appContext.ctx.req) {
+  if (!appContext.ctx.req) {
     return appProps;
   }
 
