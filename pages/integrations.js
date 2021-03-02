@@ -16,7 +16,6 @@ export default function Integrations() {
             <button>Enable</button>
           </div>
         ))}
-        ``
       </div>
     </Layout>
   );

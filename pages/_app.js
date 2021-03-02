@@ -9,8 +9,15 @@ function MyApp({ Component, pageProps }) {
 
 MyApp.getInitialProps = async (appContext) => {
   const appProps = await App.getInitialProps(appContext);
+  if (appContext.ctx.req) {
+    return appProps;
+  }
+
   const authenticatedUser = appContext.ctx.req?.user;
-  return { ...appProps, user: authenticatedUser };
+  return {
+    ...appProps,
+    user: authenticatedUser,
+  };
 };
 
 export default MyApp;

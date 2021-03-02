@@ -10,7 +10,6 @@ class RootDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <script src="https://cdn.useparagon.com/latest/sdk/index.js" />
         </body>
       </Html>
     );
