@@ -177,6 +177,12 @@ class TodoApp extends React.Component {
 
     if (val) {
       this.props.model.addTodo(val);
+      paragon.event("Task Created", {
+        creator: "Ethan Lee",
+        summary: val,
+        priority: "P1",
+        status: "Not Started",
+      });
       this.setState({ newTodo: "" });
     }
   }
