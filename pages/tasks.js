@@ -4,8 +4,8 @@ import TodoApp from "../components/TodoApp";
 import TodoModel from "../components/TodoModel";
 import useParagonGlobal from "../hooks/useParagonGlobal";
 
-export default function Home({ user }) {
-  const paragon = useParagonGlobal();
+export default function Home({ user, paragonUserToken }) {
+  const paragon = useParagonGlobal(paragonUserToken);
 
   const model = useRef(new TodoModel("react-todos"));
   const [tick, setTick] = useState(0);
