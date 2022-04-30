@@ -10,15 +10,19 @@ const Layout = ({ children, title }) => {
     <div className="page">
       <header className={styles.header}>
         <p>TaskLab</p>
-        <p style={{ fontWeight: 500 }}>{title}</p>
-        <img src="https://pbs.twimg.com/profile_images/1166852405327101957/lf0QNniz.jpg" />
+        <p style={{ fontWeight: 500, textAlign: "center" }}>{title}</p>
+        <div className="user-container"></div>
       </header>
       <nav className={styles.nav}>
-        <Link href="/">
-          <a className={router.asPath === "/" ? styles.active : ""}>Tasks</a>
+        <Link href="/tasks">
+          <a className={router.asPath === "/tasks" ? styles.active : ""}>
+            Tasks
+          </a>
         </Link>
         <Link href="/integrations">
-          <a className={router.asPath === "/integrations" ? styles.active : ""}>Integrations</a>
+          <a className={router.asPath === "/integrations" ? styles.active : ""}>
+            Integrations
+          </a>
         </Link>
       </nav>
       {children}

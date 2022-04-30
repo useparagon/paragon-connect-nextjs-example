@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { Utils } from "../TodoModel";
+import { Utils } from "./TodoModel";
 
 var ESCAPE_KEY = 27;
 var ENTER_KEY = 13;
@@ -112,7 +112,10 @@ class TodoFooter extends React.Component {
 
     if (this.props.completedCount > 0) {
       clearButton = (
-        <button className="clear-completed" onClick={this.props.onClearCompleted}>
+        <button
+          className="clear-completed"
+          onClick={this.props.onClearCompleted}
+        >
           Clear completed
         </button>
       );
@@ -126,19 +129,27 @@ class TodoFooter extends React.Component {
         </span>
         <ul className="filters">
           <li>
-            <a href="#/" className={classNames({ selected: nowShowing === ALL_TODOS })}>
+            <a
+              href="#/"
+              className={classNames({ selected: nowShowing === ALL_TODOS })}
+            >
               All
             </a>
           </li>{" "}
           <li>
-            <a href="#/active" className={classNames({ selected: nowShowing === ACTIVE_TODOS })}>
+            <a
+              href="#/active"
+              className={classNames({ selected: nowShowing === ACTIVE_TODOS })}
+            >
               Active
             </a>
           </li>{" "}
           <li>
             <a
               href="#/completed"
-              className={classNames({ selected: nowShowing === COMPLETED_TODOS })}
+              className={classNames({
+                selected: nowShowing === COMPLETED_TODOS,
+              })}
             >
               Completed
             </a>
@@ -177,12 +188,9 @@ class TodoApp extends React.Component {
 
     if (val) {
       this.props.model.addTodo(val);
-      paragon.event("Task Created", {
-        creator: "Ethan Lee",
-        summary: val,
-        priority: "P1",
-        status: "Not Started",
-      });
+      if (this.props.onNewTodo) {
+        this.props.onNewTodo(val);
+      }
       this.setState({ newTodo: "" });
     }
   }

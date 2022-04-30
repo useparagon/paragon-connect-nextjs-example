@@ -1,21 +1,33 @@
 import Layout from "../components/Layout";
+import useParagonGlobal from "../hooks/useParagonGlobal";
 import styles from "../styles/Integrations.module.css";
-import icons from "../icons";
-import names from "../names";
 
-export default function Integrations() {
-  const integrations = Object.keys(paragon.getUser().integrations);
+export default function Integrations({ paragonUserToken }) {
+  const paragon = useParagonGlobal(paragonUserToken);
+
+  // Get all integrations for this Paragon project to render their names and icons
+  const integrations = paragon?.getIntegrationMetadata() || [];
 
   return (
     <Layout title="Integrations">
       <div className={styles.container}>
-        {integrations.map((integration) => (
-          <div className={styles.row}>
-            <img src={icons[integration]} />
-            <p>{names[integration]}</p>
-            <button onClick={() => paragon.connect(integration)}>Enable</button>
-          </div>
-        ))}
+        {integrations.map((integration) => {
+          // Check the user state if this integration is enabled for the user
+          const integrationEnabled =
+            paragon.getUser().integrations[integration.type]?.enabled;
+
+          return (
+            <div key={integration.type} className={styles.row}>
+              <img src={integration.icon} style={{ maxWidth: "30px" }} />
+              <p>{integration.name}</p>
+
+              {/* When clicked, display the Connect Portal for this integration */}
+              <button onClick={() => paragon.connect(integration.type)}>
+                {integrationEnabled ? "Manage" : "Enable"}
+              </button>
+            </div>
+          );
+        })}
       </div>
     </Layout>
   );
