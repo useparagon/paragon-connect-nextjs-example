@@ -1,0 +1,17 @@
+{
+  "name": "Paragon - Sample App",
+  "description": "A demo Next.js app, with integrations built on Paragon",
+  "repository": "https://github.com/paragon/paragon-connect-nextjs-example",
+  "logo": "https://useparagon.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F993639c4-2223-4ae3-a2c1-b6fe38bd4cd6%2Fwebclip.png?table=block&id=f37c07ca-3b88-47ca-9dcc-2e0ecef8190c&spaceId=731f846c-b074-4391-8301-e3172493b9f1&width=1540&userId=&cache=v2",
+  "keywords": ["integrations", "next.js"],
+  "env": {
+    "NEXT_PUBLIC_PARAGON_PROJECT_ID": {
+      "description": "Your Paragon Project ID, which can be found in the Paragon dashboard in any integration.",
+      "required": true
+    },
+    "PARAGON_SIGNING_KEY": {
+      "description": "Your Paragon Signing Key, which can be created in the Settings tab of the Paragon dashboard.",
+      "required": true
+    }
+  }
+}
