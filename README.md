@@ -1,5 +1,7 @@
 # Paragon Connect Next.js Demo
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/useparagon/paragon-connect-nextjs-example)
+
 This is an example app based on [TodoMVC in React](https://github.com/tastejs/todomvc/tree/gh-pages/examples/react/js) and the Next.js starter project.
 
 For more info on adding Paragon Connect to your app, see:
