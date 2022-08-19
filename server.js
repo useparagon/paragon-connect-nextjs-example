@@ -33,13 +33,14 @@ function getLoggedInUser() {
   return user;
 }
 
+const port = process.env.PORT ?? 3000;
 app.prepare().then(() => {
   createServer((req, res) => {
     const parsedUrl = parse(req.url, true);
     req.user = getLoggedInUser();
     handle(req, res, parsedUrl);
-  }).listen(3000, (err) => {
+  }).listen(port, (err) => {
     if (err) throw err;
-    console.log("> Ready on http://localhost:3000");
+    console.log(`> Ready on http://localhost:${port}`);
   });
 });
