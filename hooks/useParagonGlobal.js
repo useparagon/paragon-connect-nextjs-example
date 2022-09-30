@@ -19,7 +19,7 @@ export default function useParagonGlobal(paragonUserToken) {
         initParagon();
       } else {
         const paragonSrc = document.createElement("script");
-        paragonSrc.src = "https://cdn.useparagon.com/latest/sdk/index.js";
+        paragonSrc.src = "https://dieciocho-connect.paragonsandbox.com/ui/scripts/sdk.js";
         paragonSrc.onload = initParagon;
         document.body.appendChild(paragonSrc);
       }

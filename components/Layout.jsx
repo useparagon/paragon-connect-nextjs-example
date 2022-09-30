@@ -11,20 +11,16 @@ const Layout = ({ children, title }) => {
       <header className={styles.header}>
         <p>TaskLab</p>
         <p style={{ fontWeight: 500, textAlign: "center" }}>{title}</p>
-        <div className="user-container"></div>
+        {router.asPath !== "/integrations" ? (
+          <Link href="/integrations">
+            <a className={styles.gotoIntegrations}>View integrations</a>
+          </Link>
+        ) : (
+          <Link href="/tasks">
+            <a className={styles.gotoIntegrations}>Back to tasks</a>
+          </Link>
+        )}
       </header>
-      <nav className={styles.nav}>
-        <Link href="/tasks">
-          <a className={router.asPath === "/tasks" ? styles.active : ""}>
-            Tasks
-          </a>
-        </Link>
-        <Link href="/integrations">
-          <a className={router.asPath === "/integrations" ? styles.active : ""}>
-            Integrations
-          </a>
-        </Link>
-      </nav>
       {children}
     </div>
   );

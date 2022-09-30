@@ -48,3 +48,8 @@
   font-weight: 600;
   color: #333;
 }
+
+.gotoIntegrations {
+  text-align: right;
+  text-decoration: none;
+}

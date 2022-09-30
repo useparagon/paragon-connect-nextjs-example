@@ -1,5 +1,5 @@
 .container {
-  width: 600px;
+  max-width: 600px;
   margin-top: 90px;
   border-radius: 3px;
   border: 1px solid #e2ebf8;
@@ -8,6 +8,7 @@
   padding: 50px 40px;
   padding-bottom: 20px;
   background-color: white;
+  box-sizing: border-box;
 }
 
 .row {
