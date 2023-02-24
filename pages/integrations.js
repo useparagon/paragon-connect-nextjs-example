@@ -11,10 +11,11 @@ export default function Integrations({ paragonUserToken }) {
   return (
     <Layout title="Integrations">
       <div className={styles.container}>
-        {integrations.map((integration) => {
+        {paragon && integrations.map((integration) => {
           // Check the user state if this integration is enabled for the user
+          const user = paragon.getUser();
           const integrationEnabled =
-            paragon.getUser().integrations[integration.type]?.enabled;
+            user.authenticated && user.integrations[integration.type]?.enabled;
 
           return (
             <div key={integration.type} className={styles.row}>
