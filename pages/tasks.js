@@ -2,11 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout";
 import TodoApp from "../components/TodoApp";
 import TodoModel from "../components/TodoModel";
-import useParagonGlobal from "../hooks/useParagonGlobal";
+import useParagon from "../hooks/useParagon";
 
 export default function Home({ user, paragonUserToken }) {
-  const paragon = useParagonGlobal(paragonUserToken);
-
+  const { paragon } = useParagon(paragonUserToken);
   const model = useRef(new TodoModel("react-todos"));
   const [tick, setTick] = useState(0);
   useEffect(() => {

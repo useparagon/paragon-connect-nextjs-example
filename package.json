@@ -1,22 +1,23 @@
 {
-  "name": "paragon-demo",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "start": "node server.js",
-    "build": "next build",
-    "server": "NODE_ENV=production node server.js"
-  },
-  "dependencies": {
-    "classnames": "^2.2.6",
-    "jsonwebtoken": "^8.5.1",
-    "next": "^12.1.5",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "todomvc-app-css": "^2.3.0",
-    "todomvc-common": "^1.0.5"
-  },
-  "engines": {
-    "node": "16.x"
-  }
+    "name": "paragon-demo",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "start": "node server.js",
+        "build": "next build",
+        "server": "NODE_ENV=production node server.js"
+    },
+    "dependencies": {
+        "@useparagon/qa-connect": "^1.0.12",
+        "classnames": "^2.2.6",
+        "jsonwebtoken": "^8.5.1",
+        "next": "^12.1.5",
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0",
+        "todomvc-app-css": "^2.3.0",
+        "todomvc-common": "^1.0.5"
+    },
+    "engines": {
+        "node": "16.x"
+    }
 }
