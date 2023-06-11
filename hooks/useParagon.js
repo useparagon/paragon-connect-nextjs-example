@@ -1,11 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
-import { paragon } from "@useparagon/qa-connect";
+import { paragon, SDK_EVENT } from "@useparagon/connect";
+
+if (typeof window !== "undefined") {
+  window.paragon = paragon;
+}
 
 export default function useParagon(paragonUserToken) {
   const [user, setUser] = useState(paragon.getUser());
   const [error, setError] = useState();
 
-  const listener = useCallback(() => {
+  const updateUser = useCallback(() => {
     const authedUser = paragon.getUser();
     if (authedUser.authenticated) {
       setUser({ ...authedUser });
@@ -14,16 +18,16 @@ export default function useParagon(paragonUserToken) {
 
   // Listen for account state changes
   useEffect(() => {
-    paragon.subscribe("onIntegrationInstall", listener);
-    paragon.subscribe("onIntegrationUninstall", listener);
+    paragon.subscribe(SDK_EVENT.ON_INTEGRATION_INSTALL, updateUser);
+    paragon.subscribe("onIntegrationUninstall", updateUser);
     return () => {
-      paragon.unsubscribe("onIntegrationInstall", listener);
-      paragon.unsubscribe("onIntegrationUninstall", listener);
+      paragon.unsubscribe("onIntegrationInstall", updateUser);
+      paragon.unsubscribe("onIntegrationUninstall", updateUser);
     };
   }, []);
 
   useEffect(() => {
-    if (!error && !user.authenticated) {
+    if (!error) {
       paragon
         .authenticate(
           process.env.NEXT_PUBLIC_PARAGON_PROJECT_ID,
@@ -37,7 +41,12 @@ export default function useParagon(paragonUserToken) {
         })
         .catch(setError);
     }
-  }, [error, user]);
+  }, [error, paragonUserToken]);
 
-  return { paragon, user, error, listener };
+  return {
+    paragon,
+    user,
+    error,
+    updateUser,
+  };
 }
