@@ -11,15 +11,26 @@ const handle = app.getRequestHandler();
 // Paragon Signing Key (stored in environment variables).
 function generateParagonUserToken(userId) {
   const createdAt = Math.floor(Date.now() / 1000);
+  const paragonSigningKey = getParagonSigningKey();
   return jsonwebtoken.sign(
     {
       sub: userId,
       iat: createdAt,
       exp: createdAt + 60 * 60,
     },
-    process.env.PARAGON_SIGNING_KEY,
+    paragonSigningKey,
     { algorithm: "RS256" }
   );
+}
+
+/**
+ * Retrieves the Paragon signing key from the environment variable,
+ * converting literal "\n" sequences to actual newline characters.
+ * @returns {string} The formatted Paragon signing key.
+ */
+function getParagonSigningKey() {
+  const signingKey = process.env.PARAGON_SIGNING_KEY || "";
+  return signingKey.replace(/\\n/g, "\n");
 }
 
 // This function might use a session identifier to find a logged-in user and
