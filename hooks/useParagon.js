@@ -5,7 +5,23 @@ if (typeof window !== "undefined") {
   window.paragon = paragon;
 }
 
-export default function useParagon(paragonUserToken) {
+function decodeJwt(token) {
+  try {
+    const base64Payload = token.split(".")[1];
+    const payload =
+      typeof window === "undefined"
+        ? Buffer.from(base64Payload, "base64").toString("utf8")
+        : atob(base64Payload);
+    return JSON.parse(payload);
+  } catch (e) {
+    return {};
+  }
+}
+
+const REFRESH_BUFFER_MS = 60 * 1000; // refresh one minute before token expiry
+
+export default function useParagon(initialToken) {
+  const [paragonUserToken, setParagonUserToken] = useState(initialToken);
   const [user, setUser] = useState(paragon.getUser());
   const [error, setError] = useState();
 
@@ -26,12 +42,13 @@ export default function useParagon(paragonUserToken) {
     };
   }, []);
 
+  // Authenticate with the current token
   useEffect(() => {
-    if (!error) {
+    if (!error && paragonUserToken) {
       paragon
         .authenticate(
           process.env.NEXT_PUBLIC_PARAGON_PROJECT_ID,
-          paragonUserToken
+          paragonUserToken,
         )
         .then(() => {
           const authedUser = paragon.getUser();
@@ -42,6 +59,29 @@ export default function useParagon(paragonUserToken) {
         .catch(setError);
     }
   }, [error, paragonUserToken]);
+
+  // Refresh the token before it expires
+  useEffect(() => {
+    if (!paragonUserToken || typeof window === "undefined") return;
+    const payload = decodeJwt(paragonUserToken);
+    if (!payload.exp) return;
+
+    async function refresh() {
+      try {
+        const resp = await fetch("/api/paragon-token");
+        if (resp.ok) {
+          const data = await resp.json();
+          setParagonUserToken(data.paragonUserToken);
+        }
+      } catch (e) {
+        console.error("Failed to refresh Paragon token", e);
+      }
+    }
+
+    const refreshTime = payload.exp * 1000 - Date.now() - REFRESH_BUFFER_MS;
+    const timer = setTimeout(refresh, Math.max(refreshTime, 0));
+    return () => clearTimeout(timer);
+  }, [paragonUserToken]);
 
   return {
     paragon,
